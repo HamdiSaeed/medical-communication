@@ -3,111 +3,208 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Upload Files to Cloud Storage</title>
+    <title>Modern Health Site</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #f0f2f5;
             margin: 0;
-            padding: 20px;
-            color: #333;
+            padding: 0;
+            background-color: #eaeef2;
+            color: #444;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
-        h1 {
+
+        header {
+            background-color: #2C3E50;
+            color: #ecf0f1;
+            padding: 40px 0;
             text-align: center;
-            color: #007bff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
-        .upload-container {
-            max-width: 600px;
+
+        header h1 {
+            font-size: 2.8em;
+            margin: 0;
+        }
+
+        header p {
+            font-size: 1.3em;
+            margin-top: 10px;
+        }
+
+        nav {
+            background: #34495e;
+            padding: 15px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: #ecf0f1;
+            margin: 0 15px;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+
+        nav a:hover {
+            background: #1abc9c;
+        }
+
+        .container {
+            flex: 1;
+            max-width: 1200px;
             margin: auto;
-            background: white;
             padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+        }
+
+        section {
+            background: white;
             border-radius: 10px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            margin: 20px 0;
+            padding: 30px;
+            transition: transform 0.3s, box-shadow 0.3s;
         }
-        .custom-file-upload {
-            display: block; /* Full width button */
-            padding: 12px; /* Same padding for both buttons */
-            cursor: pointer;
-            background-color: #007bff;
-            color: white;
-            border-radius: 5px;
+
+        section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        section h2 {
+            color: #2980b9;
+            margin-bottom: 15px;
+            font-size: 2em;
+        }
+
+        section p {
+            font-size: 1em;
+            line-height: 1.5;
+        }
+
+        footer {
             text-align: center;
-            font-weight: bold;
-            transition: background-color 0.3s;
-            margin-bottom: 10px; /* Spacing between buttons */
-            border: none; /* Remove border */
-        }
-        .custom-file-upload:hover {
-            background-color: #0056b3;
-        }
-        input[type="file"] {
-            display: none; /* Hide original input */
-        }
-        button {
-            display: block;
+            padding: 20px;
+            background: #2C3E50;
+            color: #ecf0f1;
             width: 100%;
-            padding: 12px; /* Same padding for both buttons */
-            background-color: #28a745;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #FF9800;
             color: white;
-            border: none;
+            padding: 10px 20px;
+            text-decoration: none;
             border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: background-color 0.3s;
-        }
-        button:hover {
-            background-color: #218838;
-        }
-        #message {
-            margin-top: 20px;
-            color: green;
-        }
-        .file-list {
+            transition: background 0.3s;
             margin-top: 20px;
         }
-        .file-item {
-            margin: 5px 0;
+
+        .cta-button:hover {
+            background: #E68A00;
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+            }
+
+            nav a {
+                margin: 10px 0;
+            }
+
+            section {
+                padding: 20px;
+            }
+
+            header h1 {
+                font-size: 2.2em;
+            }
+
+            header p {
+                font-size: 1.1em;
+            }
         }
     </style>
 </head>
 <body>
 
-    <div class="upload-container">
-        <h1>Upload Your Files to Cloud Storage</h1>
-        <form action="upload.php" method="POST" enctype="multipart/form-data">
-            <label class="custom-file-upload">
-                Choose Files
-                <input type="file" name="file" required>
-            </label>
-            <button type="submit">Upload</button>
-        </form>
-        <div id="message"></div>
-        <div class="file-list" id="fileList"></div>
-    </div>
+<header>
+    <h1>Modern Health Site</h1>
+    <p>Everything you need about modern medicine</p>
+</header>
 
-    <script>
-        // دالة لجلب الملفات من GitHub
-        async function fetchFiles() {
-            const repo = 'HamdiSaeed/H'; // استبدل هذا باسم المستخدم واسم المستودع
-            const url = `https://api.github.com/repos/${repo}/contents/`;
+<nav>
+    <a href="#home">Home</a>
+    <a href="#sections">Sections</a>
+    <a href="#research">Research</a>
+    <a href="#health">Public Health</a>
+    <a href="#medication">Medications</a>
+    <a href="#education">Medical Education</a>
+    <a href="#medical-libraries">Medical Libraries</a>
+</nav>
 
-            const response = await fetch(url);
-            const files = await response.json();
+<div class="container">
 
-            const fileListDiv = document.getElementById('fileList');
-            fileListDiv.innerHTML = '';
+<section id="sections">
+    <h2>Medical Sections</h2>
+    <p><strong>Human Medicine:</strong> <a href="https://www.who.int" target="_blank">World Health Organization</a></p>
+    <p><strong>Psychiatry:</strong> <a href="https://www.psychiatry.org" target="_blank">American Psychiatric Association</a></p>
+    <p><strong>Obstetrics and Gynecology:</strong> <a href="https://www.acog.org" target="_blank">American College of Obstetricians and Gynecologists</a></p>
+    <p><strong>Pediatrics:</strong> <a href="https://www.aap.org" target="_blank">American Academy of Pediatrics</a></p>
+    <p><strong>Internal Medicine:</strong> <a href="https://www.acponline.org" target="_blank">American College of Physicians</a></p>
+    <p><strong>Emergency Medicine:</strong> <a href="https://www.acep.org" target="_blank">American College of Emergency Physicians</a></p>
+    <p><strong>Alternative Medicine:</strong> <a href="https://nccih.nih.gov" target="_blank">National Center for Complementary and Integrative Health</a></p>
+</section>
 
-            files.forEach(file => {
-                const fileItem = document.createElement('div');
-                fileItem.className = 'file-item';
-                fileItem.innerHTML = `<a href="${file.download_url}" target="_blank">${file.name}</a>`;
-                fileListDiv.appendChild(fileItem);
-            });
-        }
+<section id="research">
+    <h2>Research and Studies</h2>
+    <p>You can search for scientific articles via: <a href="https://pubmed.ncbi.nlm.nih.gov" target="_blank">PubMed</a></p>
+</section>
 
-        // استدعاء الدالة عند تحميل الصفحة
-        document.addEventListener('DOMContentLoaded', fetchFiles);
-    </script>
+<section id="health">
+    <h2>Public Health</h2>
+    <p>Information about infectious diseases from: <a href="https://www.cdc.gov" target="_blank">Centers for Disease Control and Prevention</a></p>
+</section>
+
+<section id="medication">
+    <h2>Medications and Treatments</h2>
+    <p>Information about medications from: <a href="https://www.fda.gov" target="_blank">Food and Drug Administration</a></p>
+</section>
+
+<section id="education">
+    <h2>Medical Education</h2>
+    <p>Explore online courses from: <a href="https://www.coursera.org" target="_blank">Coursera</a></p>
+</section>
+
+<section id="medical-libraries">
+    <h2>Medical Libraries</h2>
+    <ul>
+        <li><strong>PubMed:</strong> <a href="https://pubmed.ncbi.nlm.nih.gov" target="_blank">PubMed</a></li>
+        <li><strong>Cochrane Library:</strong> <a href="https://www.cochranelibrary.com" target="_blank">Cochrane Library</a></li>
+        <li><strong>Google Scholar:</strong> <a href="https://scholar.google.com" target="_blank">Google Scholar</a></li>
+        <li><strong>ResearchGate:</strong> <a href="https://www.researchgate.net" target="_blank">ResearchGate</a></li>
+        <li><strong>Directory of Open Access Journals (DOAJ):</strong> <a href="https://doaj.org" target="_blank">DOAJ</a></li>
+        <li><strong>World Digital Library:</strong> <a href="https://www.wdl.org" target="_blank">World Digital Library</a></li>
+        <li><strong>Health Library:</strong> <a href="https://www.healthlibrary.com" target="_blank">Health Library</a></li>
+    </ul>
+</section>
+
+</div>
+
+<footer>
+    <p>&copy; 2024 Modern Health Site. All rights reserved.</p>
+</footer>
 
 </body>
 </html>
