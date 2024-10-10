@@ -5,55 +5,110 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modern Health Site</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>
     <style>
+        :root {
+            --bg-color: #eaeef2;
+            --text-color: #444;
+            --card-bg: #ffffff;
+            --card-shadow: 20px 20px 60px #c5c9cc, -20px -20px 60px #ffffff;
+            --header-bg: #2C3E50;
+            --header-text: #ecf0f1;
+            --nav-bg: #34495e;
+            --nav-text: #ecf0f1;
+            --accent-color: #1abc9c;
+            --cta-color: #FF9800;
+        }
+
         body {
             font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #eaeef2;
-            color: #444;
+            background-color: var(--bg-color);
+            color: var(--text-color);
             display: flex;
             flex-direction: column;
             min-height: 100vh;
+            transition: all 0.3s ease;
         }
 
         header {
-            background-color: #2C3E50;
-            color: #ecf0f1;
-            padding: 40px 0;
+            background-color: var(--header-bg);
+            color: var(--header-text);
+            padding: 60px 0; /* زيادة المساحة */
             text-align: center;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://picsum.photos/2200/2000?random=1') center/cover no-repeat;
+            opacity: 0.3;
+            z-index: 0;
+        }
+
+        header h1, header p {
+            position: relative;
+            z-index: 1;
         }
 
         header h1 {
-            font-size: 2.8em;
+            font-size: 3.2em; /* زيادة حجم الخط */
             margin: 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
         }
 
         header p {
-            font-size: 1.3em;
+            font-size: 1.5em; /* زيادة حجم الخط */
             margin-top: 10px;
         }
 
         nav {
-            background: #34495e;
-            padding: 15px;
+            background: var(--nav-bg);
+            padding: 5px; /* تقليل المساحة */
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            text-align: center; /* إضافة هذه الخاصية */
         }
 
         nav a {
-            color: #ecf0f1;
-            margin: 0 15px;
+            color: var(--nav-text);
+            margin: 0 5px; /* تقليل المسافة بين الروابط */
             text-decoration: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            transition: background 0.3s;
+            padding: 5px 15px; /* تقليل padding */
+            border-radius: 25px;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            font-size: 0.9em; /* تقليل حجم الخط */
         }
 
-        nav a:hover {
-            background: #1abc9c;
+        nav a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--accent-color);
+            transition: all 0.3s;
+            z-index: -1;
+        }
+
+        nav a:hover::before {
+            left: 0;
         }
 
         .container {
@@ -67,21 +122,45 @@
         }
 
         section {
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            background: var(--card-bg);
+            border-radius: 20px;
+            box-shadow: var(--card-shadow);
             margin: 20px 0;
             padding: 30px;
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://picsum.photos/2200/2000?random=2') center/cover no-repeat;
+            opacity: 0.1;
+            z-index: 0;
+            transition: all 0.3s;
+        }
+
+        section:hover::before {
+            transform: scale(1.1);
+        }
+
+        section h2, section p, section ul {
+            position: relative;
+            z-index: 1;
         }
 
         section:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+            box-shadow: var(--card-shadow), 0 8px 30px rgba(0, 0, 0, 0.2);
         }
 
         section h2 {
-            color: #2980b9;
+            color: var(--accent-color);
             margin-bottom: 15px;
             font-size: 2em;
         }
@@ -94,24 +173,37 @@
         footer {
             text-align: center;
             padding: 20px;
-            background: #2C3E50;
-            color: #ecf0f1;
+            background: var(--header-bg);
+            color: var(--header-text);
             width: 100%;
         }
 
         .cta-button {
             display: inline-block;
-            background: #FF9800;
+            background: var(--cta-color);
             color: white;
-            padding: 10px 20px;
+            padding: 12px 24px;
             text-decoration: none;
-            border-radius: 5px;
-            transition: background 0.3s;
+            border-radius: 25px;
+            transition: all 0.3s;
             margin-top: 20px;
+            position: relative;
+            overflow: hidden;
         }
 
-        .cta-button:hover {
-            background: #E68A00;
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255,255,255,0.2);
+            transition: all 0.3s;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
         }
 
         @media (max-width: 768px) {
@@ -120,7 +212,7 @@
             }
 
             nav a {
-                margin: 10px 0;
+                margin: 5px 0; /* تقليل المسافة بين الروابط في الأجهزة الصغيرة */
             }
 
             section {
@@ -128,11 +220,11 @@
             }
 
             header h1 {
-                font-size: 2.2em;
+                font-size: 2.5em; /* تقليل حجم الخط في الأجهزة الصغيرة */
             }
 
             header p {
-                font-size: 1.1em;
+                font-size: 1.2em; /* تقليل حجم الخط في الأجهزة الصغيرة */
             }
         }
     </style>
@@ -205,6 +297,110 @@
 <footer>
     <p>&copy; 2024 Modern Health Site. All rights reserved.</p>
 </footer>
+
+<script>
+    // GSAP animations
+    gsap.registerPlugin(ScrollTrigger);
+
+    gsap.from('header', {
+        opacity: 0,
+        y: -50,
+        duration: 1,
+        ease: 'power3.out'
+    });
+
+    gsap.from('nav a', {
+        opacity: 0,
+        y: -20,
+        stagger: 0.1,
+        duration: 0.5,
+        ease: 'power2.out'
+    });
+
+    gsap.utils.toArray('section').forEach((section, i) => {
+        gsap.from(section, {
+            opacity: 0,
+            y: 50,
+            duration: 1,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: section,
+                start: 'top 80%',
+                end: 'top 20%',
+                toggleActions: 'play none none reverse'
+            }
+        });
+    });
+
+    // Particle background animation
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    document.body.appendChild(canvas);
+
+    canvas.style.position = 'fixed';
+    canvas.style.top = '0';
+    canvas.style.left = '0';
+    canvas.style.width = '100%';
+    canvas.style.height = '100%';
+    canvas.style.pointerEvents = 'none';
+    canvas.style.zIndex = '-1';
+
+    let particlesArray;
+
+    class Particle {
+        constructor(x, y) {
+            this.x = x;
+            this.y = y;
+            this.size = Math.random() * 5 + 1;
+            this.speedX = Math.random() * 3 - 1.5;
+            this.speedY = Math.random() * 3 - 1.5;
+        }
+        update() {
+            this.x += this.speedX;
+            this.y += this.speedY;
+            if (this.size > 0.2) this.size -= 0.1;
+        }
+        draw() {
+            ctx.fillStyle = 'rgba(255,255,255,0.8)';
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fill();
+        }
+    }
+
+    function init() {
+        particlesArray = [];
+        for (let i = 0; i < 100; i++) {
+            let x = Math.random() * canvas.width;
+            let y = Math.random() * canvas.height;
+            particlesArray.push(new Particle(x, y));
+        }
+    }
+
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (let i = 0; i < particlesArray.length; i++) {
+            particlesArray[i].update();
+            particlesArray[i].draw();
+            if (particlesArray[i].size <= 0.2) {
+                particlesArray.splice(i, 1);
+                i--;
+            }
+        }
+        requestAnimationFrame(animate);
+    }
+
+    window.addEventListener('resize', function() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        init();
+    });
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    init();
+    animate();
+</script>
 
 </body>
 </html>
