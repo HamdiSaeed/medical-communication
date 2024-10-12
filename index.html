@@ -134,6 +134,7 @@
             overflow: hidden;
             opacity: 0;
             transform: translateY(50px);
+            margin-top: 60px; /* إضافة مساحة أعلى الأقسام */
         }
 
         section::before {
@@ -331,6 +332,21 @@
         });
     });
 
+    // Smooth scroll behavior for navigation links
+    document.querySelectorAll('nav a').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            const navHeight = document.querySelector('nav').offsetHeight;
+            
+            window.scrollTo({
+                top: targetElement.offsetTop - navHeight,
+                behavior: 'smooth'
+            });
+        });
+    });
+
     // Particle background animation
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
@@ -402,4 +418,4 @@
 </script>
 
 </body>
-    </html>
+</html>
